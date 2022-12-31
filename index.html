@@ -50,11 +50,11 @@
                             <label for="inputCurso">
                                 <h5>Curso</h5>
                             </label>
-                            <input type="number" class="form-control" id="curso" placeholder="curso">
+                            <input type="number" min="1" max="6" class="form-control" id="curso" placeholder="curso">
                             <label for="inputEdad">
                                 <h5>Edad</h5>
                             </label>
-                            <input type="number" class="form-control" id="edad" placeholder="edad">
+                            <input type="number" min="5" max="14" class="form-control" id="edad" placeholder="edad">
 
                         </div>
                     </div>
@@ -73,12 +73,16 @@
                 <h4>Tabla Alumnado</h4>
                 <div class="div-alumnado">
                     <table class="table table-striped" id="lista">
+                        <thead>
                         <tr>
-                            <td>Id</td>
-                            <td>Nombre</td>
-                            <td>Curso</td>
-                            <td>Edad</td>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>CURSO</th>
+                            <th>EDAD</th>
+                            <th>EDITAR</th>
+                            <th>BORRAR</th>
                         </tr>
+                    </thead>
                     </table>
                 </div>
             </div>
