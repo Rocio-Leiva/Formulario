@@ -14,8 +14,10 @@ let nombreInput = document.querySelector('#nombre');
 let cursoInput = document.querySelector('#curso');
 let edadInput = document.querySelector('#edad');
 let btnAgregar = document.querySelector('#btnAgregar');
+let estadistica = document.querySelector('#estadistica')
 
 formulario.addEventListener('submit', validarFormulario);
+estadistica.addEventListener('submit', mostrarEstadistica)
 
 function validarFormulario(event) {
     event.preventDefault();
@@ -66,13 +68,12 @@ function mostrarAlumnado() {
     let divAlumnado = document.querySelector('.div-alumnado');
 
     let tabla = document.createElement('table');
-    tabla.classList.add('table', 'table-striped')
-    tabla.setAttribute('id', 'lista')
+    tabla.classList.add('table', 'table-striped');
+    tabla.setAttribute('id', 'lista');
 
-    let thHead = document.createElement('thead');
-    let trHead = document.createElement('tr');
-
-    let tBody = document.createElement('tbody');
+    const tHead = document.createElement('thead')
+    
+    const trHead = document.createElement('tr')
 
     let thId = document.createElement('th');
     let textThID = document.createTextNode('ID');
@@ -80,23 +81,23 @@ function mostrarAlumnado() {
 
     let thNombre = document.createElement('th');
     let textThNombre = document.createTextNode('NOMBRE');
-    thId.appendChild(textThNombre)
+    thNombre.appendChild(textThNombre)
 
     let thCurso = document.createElement('th');
     let textThCurso = document.createTextNode('CURSO');
-    thId.appendChild(textThCurso)
+    thCurso.appendChild(textThCurso)
 
     let thEdad = document.createElement('th');
     let textThEdad = document.createTextNode('EDAD');
-    thId.appendChild(textThEdad)
+    thEdad.appendChild(textThEdad)
 
     let thEditar = document.createElement('th');
     let textThEditar = document.createTextNode('EDITAR');
-    thId.appendChild(textThEditar)
+    thEditar.appendChild(textThEditar)
 
     let thBorrar = document.createElement('th');
     let textThBorrar = document.createTextNode('BORRAR');
-    thId.appendChild(textThBorrar)
+    thBorrar.appendChild(textThBorrar)
 
     trHead.appendChild(thId)
     trHead.appendChild(thNombre)
@@ -104,34 +105,30 @@ function mostrarAlumnado() {
     trHead.appendChild(thEdad)
     trHead.appendChild(thEditar)
     trHead.appendChild(thBorrar)
+    
+    tHead.appendChild(trHead)
 
-    trHead.appendChild(thHead)
-
-
+    const tBody = document.createElement('tbody')
 
     listaAlumnado.forEach(alumnado => {
         let { id, nombre, curso, edad } = alumnado;
 
-        // let parrafo = document.createElement('p');
-        // parrafo.textContent = `${id} - ${nombre} - ${curso} - ${edad} - `;
-        // parrafo.dataset.id= id;
-
         let trBody = document.createElement('tr'); 
 
         let tdId = document.createElement('td');
-        let textTdId = document.createTextNode('id');
+        let textTdId = document.createTextNode(id);
         tdId.appendChild(textTdId)
 
         let tdNombre = document.createElement('td');
-        let textTdNombre = document.createTextNode('nombre');
+        let textTdNombre = document.createTextNode(nombre);
         tdNombre.appendChild(textTdNombre)
 
         let tdCurso = document.createElement('td');
-        let textTdCurso = document.createTextNode('curso');
+        let textTdCurso = document.createTextNode(curso);
         tdCurso.appendChild(textTdCurso)
 
         let tdEdad = document.createElement('td');
-        let textTdEdad = document.createTextNode('edad');
+        let textTdEdad = document.createTextNode(edad);
         tdEdad.appendChild(textTdEdad)
 
         let tdEditarBoton = document.createElement('td');
@@ -158,12 +155,12 @@ function mostrarAlumnado() {
         trBody.appendChild(tdEliminarBoton)
 
         tBody.appendChild(trBody)
-
     })
 
-       tabla.appendChild(tHead);
-       tabla.appendChild(tBody);
-        divAlumnado.appendChild(tabla);
+    tabla.appendChild(tBody)
+    tabla.appendChild(tHead)
+    
+    divAlumnado.appendChild(tabla);
 }
 
 function cargarAlumnado(alumnado) {
@@ -227,44 +224,12 @@ function limpiarHTML() {
     }
 }
 
-
-// Agregar una segunda tabla de estadísticas, donde se calcule valores tales como el promedio de un determinado valor entre registros, la cantidad de registros, el máximo, el mínimo, el promedio, etc.
-
-let resultados = document.querySelector('formulario');
-
-estadistica.addEventListener('submit', resultados);
-
-// function maximaEdad(){
-//     let maxEdad = objAlumnado.edad ;
-//     let resultMaxEdad = Math.max(...maxEdad);
-
-// function maximoCurso(){
-//     let maxCurso = objAlumnado.curso;
-//     let resultMaxCurso = Math.max(...maxCurso);
-
-// function minimaEdad(){
-//     let minEdad = objAlumnado.edad ;
-//     let resultMinEdad = Math.min(...minEdad);
-
-// function minimoCurso(){
-//     let minCurso = objAlumnado.curso;
-//     let resultMinCurso = Math.min(...minCurso);
-
-// devuelva cuántos son.
-// function cantidadRegistros(){
-//     let cantidad = objAlumnado.nombre;
-//     let resultCantidad = cantidad.length;
-//     return "Hay " + resultCantidad + " inscripciones";
-//   }
+function mostrarEstadistica(event) {
+    event.preventDefault();
+    if(listaAlumnado.length == 0) {
+        alert('NO SE PUEDE OBTENER ESTADISTICAS SI NO HAY REGISTROS')
+        return
+    }
 
 
-//promedio 
-// function promedioEdad (){
-    // var suma = 0;
-
-    // for(var x = 0; x < arreglo.length; x++){
-    //   suma += arreglo[x];
-    // }
-    // var promedio = suma / arreglo.length;
-// }
-
+}
