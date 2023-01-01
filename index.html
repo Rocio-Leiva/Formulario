@@ -60,13 +60,11 @@
                     </div>
                     <br><br>
                     <div class="botones">
-                        <button type="submit" id="btnAgregar" class="btn btn-success" id="agregar">Cargar Lista</button>
+                        <button type="submit" id="btnAgregar" class="btn btn-success">Cargar Lista</button>
 
-                        <button type="submit" class="btn btn-success" id="guardar">Guardar Lista</button>
+                        <button type="submit" id="guardar" class="btn btn-success">Guardar Lista</button>
                     </div>
                 </form>
-                </form>
-
         </main>
         <aside>
             <div class="div-listado">
@@ -74,32 +72,36 @@
                 <div class="div-alumnado">
                     <table class="table table-striped" id="lista">
                         <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>CURSO</th>
-                            <th>EDAD</th>
-                            <th>EDITAR</th>
-                            <th>BORRAR</th>
-                        </tr>
-                    </thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>CURSO</th>
+                                <th>EDAD</th>
+                                <th>EDITAR</th>
+                                <th>BORRAR</th>
+                            </tr>
+                        </thead>
                     </table>
                 </div>
             </div>
             <div>
                 <h4>Estadística</h4>
-                <div class="boton">
-                    <button type="submit" id="btnEstadistica" class="btn btn-info" id="agregar">Resultados</button>
+                <form action="#" id="estadistica">
+                    <div class="boton">
+                        <button type="submit" id="btnEstadistica" class="btn btn-info">Resultados</button>
+                    </div>
+                </form>
+                
+                <div class="div-estadistica">
+                    <table class="table table-striped" id="tabla-estadistica">
+                        <thead>
+                            <tr>
+                                <th>MEDIA EDAD</th>
+                                <th>MEDIA CURSO</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-                <!-- <div class="div-estadistica">
-                    <table class="table table-striped" id="estadistica">
-                        <tr>
-                            <td>Media Edad</td>
-                            <td>Media curso</td>
-
-                        </tr> -->
-                    <!-- </table> -->
-                <!-- </div> -->
             </div>
         </aside>
 
