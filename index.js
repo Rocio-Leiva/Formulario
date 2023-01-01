@@ -116,6 +116,8 @@ function mostrarAlumnado() {
         // parrafo.textContent = `${id} - ${nombre} - ${curso} - ${edad} - `;
         // parrafo.dataset.id= id;
 
+        let trBody = document.createElement('tr'); 
+
         let tdId = document.createElement('td');
         let textTdId = document.createTextNode('id');
         tdId.appendChild(textTdId)
@@ -224,3 +226,45 @@ function limpiarHTML() {
         divAlumnado.removeChild(divAlumnado.firstChild);
     }
 }
+
+
+// Agregar una segunda tabla de estadísticas, donde se calcule valores tales como el promedio de un determinado valor entre registros, la cantidad de registros, el máximo, el mínimo, el promedio, etc.
+
+let resultados = document.querySelector('formulario');
+
+estadistica.addEventListener('submit', resultados);
+
+// function maximaEdad(){
+//     let maxEdad = objAlumnado.edad ;
+//     let resultMaxEdad = Math.max(...maxEdad);
+
+// function maximoCurso(){
+//     let maxCurso = objAlumnado.curso;
+//     let resultMaxCurso = Math.max(...maxCurso);
+
+// function minimaEdad(){
+//     let minEdad = objAlumnado.edad ;
+//     let resultMinEdad = Math.min(...minEdad);
+
+// function minimoCurso(){
+//     let minCurso = objAlumnado.curso;
+//     let resultMinCurso = Math.min(...minCurso);
+
+// devuelva cuántos son.
+// function cantidadRegistros(){
+//     let cantidad = objAlumnado.nombre;
+//     let resultCantidad = cantidad.length;
+//     return "Hay " + resultCantidad + " inscripciones";
+//   }
+
+
+//promedio 
+// function promedioEdad (){
+    // var suma = 0;
+
+    // for(var x = 0; x < arreglo.length; x++){
+    //   suma += arreglo[x];
+    // }
+    // var promedio = suma / arreglo.length;
+// }
+
