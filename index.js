@@ -6,18 +6,29 @@ let objAlumnado = {
     curso: '',
     edad: ''
 }
+
 // agregar o actualizar la info
 let editando = false;
 
+let maxE = 0;
+let maxC = 0;
+let minE = "";
+let minC = "";
+let promedio = 0;
+
 let formulario = document.querySelector('#formulario');
+
 let nombreInput = document.querySelector('#nombre');
 let cursoInput = document.querySelector('#curso');
 let edadInput = document.querySelector('#edad');
+
 let btnAgregar = document.querySelector('#btnAgregar');
 let estadistica = document.querySelector('#estadistica')
 
+let divEstadistica = document.querySelector('.div-estadistica');
+
 formulario.addEventListener('submit', validarFormulario);
-estadistica.addEventListener('submit', mostrarEstadistica)
+estadistica.addEventListener('submit', mostrarEstadistica);
 
 function validarFormulario(event) {
     event.preventDefault();
@@ -26,6 +37,7 @@ function validarFormulario(event) {
         alert('Por favor, rellena todos los campos');
         return;
     }
+
     if (editando) {
         editarAlumnado();
         editando = false;
@@ -111,7 +123,7 @@ function mostrarAlumnado() {
     const tBody = document.createElement('tbody')
 
     listaAlumnado.forEach(alumnado => {
-        let { id, nombre, curso, edad } = alumnado;
+        let { id, nombre, curso, edad } = alumnado
 
         let trBody = document.createElement('tr'); 
 
@@ -157,14 +169,13 @@ function mostrarAlumnado() {
         tBody.appendChild(trBody)
     })
 
-    tabla.appendChild(tBody)
     tabla.appendChild(tHead)
+    tabla.appendChild(tBody)
     
     divAlumnado.appendChild(tabla);
 }
 
 function cargarAlumnado(alumnado) {
-
     let { id, nombre, curso, edad } = alumnado;
 
     nombreInput.value = nombre;
@@ -178,7 +189,6 @@ function cargarAlumnado(alumnado) {
     formulario.querySelector('button[type="submit"]').classList.add('btn-primary');
 
     editando = true;
-
 }
 
 
@@ -195,7 +205,6 @@ function editarAlumnado() {
             alumnado.curso = objAlumnado.curso;
             alumnado.edad = objAlumnado.edad;
         }
-
     });
 
     limpiarHTML();
@@ -227,50 +236,70 @@ function limpiarHTML() {
 function mostrarEstadistica(event) {
     event.preventDefault();
     if(listaAlumnado.length == 0) {
-        alert('NO SE PUEDE OBTENER ESTADISTICAS SI NO HAY REGISTROS')
+        alert('No hay estadística porque no existen registros')
         return
     }
 
+    maxEdad();
+    maxCurso();
+    minEdad();
+    // promedioEdad();
+    // cantidadRegistros();
 
+    divEstadistica.innerHTML = `
+    <p> La edad máxima es de: ${maxE} años </p> 
+    <p> El curso mayor es: ${maxC} de primaria </p>
+    <p> La edad mínima es de: ${minE} años </p> 
+    <p> El curso menor es: ${minC} de primaria </p> 
+    <p> El promedio de edades: ${promedio} años </p> 
+    
+    `
 }
 
-// Agregar una segunda tabla de estadísticas, donde se calcule valores tales como el promedio de un determinado valor entre registros, la cantidad de registros, el máximo, el mínimo, el promedio, etc.
+function maxEdad() {
+    listaAlumnado.forEach(alumno => {
+        if (maxE < alumno.edad) {
+            maxE = alumno.edad
+        }
+    })
+}
 
-let resultados = document.querySelector('formulario');
+function maxCurso() {
+    listaAlumnado.forEach(alumno => {
+        if (maxC < alumno.curso) {
+            maxC = alumno.curso
+        }
+    })
+}
 
-estadistica.addEventListener('submit', resultados);
+function minEdad() {
+    listaAlumnado.forEach(alumno => {
+        if (minE > alumno.edad) {
+            minE = alumno.edad
+        }
+    })
+}
 
-// function maximaEdad(){
-//     let maxEdad = objAlumnado.edad ;
-//     let resultMaxEdad = Math.max(...maxEdad);
+function minCurso() {
+    listaAlumnado.forEach(alumno => {
+        if (minC > alumno.curso) {
+            minC = alumno.curso
+        }
+    })
+}
 
-// function maximoCurso(){
-//     let maxCurso = objAlumnado.curso;
-//     let resultMaxCurso = Math.max(...maxCurso);
+// function cantidadRegistros() {
+//     let cantidad = listaAlumnado.length
 
-// function minimaEdad(){
-//     let minEdad = objAlumnado.edad ;
-//     let resultMinEdad = Math.min(...minEdad);
+//     }
+   
 
-// function minimoCurso(){
-//     let minCurso = objAlumnado.curso;
-//     let resultMinCurso = Math.min(...minCurso);
+// function promedioEdad(){
+//     let suma = 0;
 
-// devuelva cuántos son.
-// function cantidadRegistros(){
-//     let cantidad = objAlumnado.nombre;
-//     let resultCantidad = cantidad.length;
-//     return "Hay " + resultCantidad + " inscripciones";
-//   }
-
-
-//promedio 
-// function promedioEdad (){
-    // var suma = 0;
-
-    // for(var x = 0; x < arreglo.length; x++){
-    //   suma += arreglo[x];
-    // }
-    // var promedio = suma / arreglo.length;
+//     for(let x = 0; x < alumno.edad.length; x++){
+//       suma += alumno.curso[x];
+//     }
+//      promedio = suma / alumno.edad.length;
 // }
 
