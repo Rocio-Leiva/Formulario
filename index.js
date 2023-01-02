@@ -81,7 +81,7 @@ function mostrarAlumnado() {
 
     let tabla = document.createElement('table');
     tabla.classList.add('table', 'table-striped');
-    tabla.setAttribute('id', 'lista', 'style: #2DA5CA');
+    tabla.setAttribute('id', 'lista');
 
     const tHead = document.createElement('thead')
     
