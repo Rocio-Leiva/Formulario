@@ -10,12 +10,6 @@ let objAlumnado = {
 // agregar o actualizar la info
 let editando = false;
 
-let maxE = 0;
-let maxC = 0;
-let minE = "";
-let minC = "";
-let promedio = 0;
-
 let formulario = document.querySelector('#formulario');
 
 let nombreInput = document.querySelector('#nombre');
@@ -30,6 +24,7 @@ let divEstadistica = document.querySelector('.div-estadistica');
 formulario.addEventListener('submit', validarFormulario);
 estadistica.addEventListener('submit', mostrarEstadistica);
 
+//evita que se actualice la página y perdamos lo que tengamos
 function validarFormulario(event) {
     event.preventDefault();
 
@@ -56,7 +51,7 @@ function agregarAlumnado() {
     listaAlumnado.push({ ...objAlumnado });
 
     mostrarAlumnado();
-
+//resetea el formulario al estado inicial
     formulario.reset();
 
     limpiarObjeto();
@@ -240,66 +235,66 @@ function mostrarEstadistica(event) {
         return
     }
 
-    maxEdad();
-    maxCurso();
-    minEdad();
-    // promedioEdad();
-    // cantidadRegistros();
+    const maxEdad = maximaEdad()
+    const minEdad = minimaEdad()
+    const maxCurso = maximoCurso()
+    const minCurso = minimoCurso()
+    const promEdad = promedioEdad()
 
     divEstadistica.innerHTML = `
-    <p> La edad máxima es de: ${maxE} años </p> 
-    <p> El curso mayor es: ${maxC} de primaria </p>
-    <p> La edad mínima es de: ${minE} años </p> 
-    <p> El curso menor es: ${minC} de primaria </p> 
-    <p> El promedio de edades: ${promedio} años </p> 
-    
+    <p> La edad máxima es de: ${maxEdad}</p>
+    <p> La edad minima es de: ${minEdad}</p>
+    <p> El curso máximo es de: ${maxCurso}</p>
+    <p> El curso minimo es de: ${minCurso}</p>
+    <p> El promedio de edad es: ${promEdad}</p>
     `
 }
 
-function maxEdad() {
+function maximaEdad() {
+    let maxEdad = 0
     listaAlumnado.forEach(alumno => {
-        if (maxE < alumno.edad) {
-            maxE = alumno.edad
+        if(maxEdad < parseInt(alumno.edad)) {
+            maxEdad = alumno.edad
         }
     })
+    return maxEdad
 }
 
-function maxCurso() {
+function minimaEdad() {
+    let minEdad = parseInt(listaAlumnado[0].edad)
     listaAlumnado.forEach(alumno => {
-        if (maxC < alumno.curso) {
-            maxC = alumno.curso
+        if(minEdad > parseInt(alumno.edad)) {
+            minEdad = alumno.edad
         }
     })
+    return minEdad
 }
 
-function minEdad() {
+function maximoCurso() {
+    let maxCurso = 0
     listaAlumnado.forEach(alumno => {
-        if (minE > alumno.edad) {
-            minE = alumno.edad
+        if(maxCurso < parseInt(alumno.curso)) {
+            maxCurso = alumno.curso
         }
     })
+    return maxCurso
 }
 
-function minCurso() {
+function minimoCurso() {
+    let minCurso = parseInt(listaAlumnado[0].curso)
     listaAlumnado.forEach(alumno => {
-        if (minC > alumno.curso) {
-            minC = alumno.curso
+        if(minCurso > parseInt(alumno.curso)) {
+            minCurso = alumno.curso
         }
     })
+    return minCurso
 }
 
-// function cantidadRegistros() {
-//     let cantidad = listaAlumnado.length
+function promedioEdad() {
+    let sumaEdades = 0
+    listaAlumnado.forEach(alumno => {
+        sumaEdades += parseInt(alumno.edad)
+    })
 
-//     }
-   
-
-// function promedioEdad(){
-//     let suma = 0;
-
-//     for(let x = 0; x < alumno.edad.length; x++){
-//       suma += alumno.curso[x];
-//     }
-//      promedio = suma / alumno.edad.length;
-// }
-
+    return (sumaEdades / listaAlumnado.length)
+}
