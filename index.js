@@ -1,3 +1,4 @@
+//crear variables donde se van a contener los datos
 let listaAlumnado = [];
 
 let objAlumnado = {
@@ -7,24 +8,21 @@ let objAlumnado = {
     edad: ''
 }
 
-// agregar o actualizar la info
+//bandera para cuando agregamos o editamos un elemento
 let editando = false;
-
+// recibir la info
 let formulario = document.querySelector('#formulario');
-
 let nombreInput = document.querySelector('#nombre');
 let cursoInput = document.querySelector('#curso');
 let edadInput = document.querySelector('#edad');
-
 let btnAgregar = document.querySelector('#btnAgregar');
 let estadistica = document.querySelector('#estadistica')
-
 let divEstadistica = document.querySelector('.div-estadistica');
-
+//capturamos evento submit
 formulario.addEventListener('submit', validarFormulario);
 estadistica.addEventListener('submit', mostrarEstadistica);
 
-//evita que se actualice la página y perdamos lo que tengamos
+//evita que se actualice la página y perdamos lo que tengamos y validar el form
 function validarFormulario(event) {
     event.preventDefault();
 
@@ -36,26 +34,25 @@ function validarFormulario(event) {
     if (editando) {
         editarAlumnado();
         editando = false;
+
     } else {
         objAlumnado.id = Date.now();
         objAlumnado.nombre = nombreInput.value;
         objAlumnado.curso = cursoInput.value;
         objAlumnado.edad = edadInput.value;
-
         agregarAlumnado();
     }
-
 }
-
+//crear el CRUD (Create, Read, Update, Delete) agregarAlumnado, mostrarAlumnado, editarAlumando y eliminarAlumnado
+//agregamos el objeto a nuestro array de alumnado y lo mostramos
 function agregarAlumnado() {
     listaAlumnado.push({ ...objAlumnado });
 
     mostrarAlumnado();
+
 //resetea el formulario al estado inicial
     formulario.reset();
-
     limpiarObjeto();
-
 }
 
 function limpiarObjeto() {
@@ -65,12 +62,9 @@ function limpiarObjeto() {
     objAlumnado.edad = '';
 }
 
-
-
 //.div-Empleados donde vamos a guardarlos
 function mostrarAlumnado() {
-
-    limpiarHTML();
+    limpiarHTML();//de la parte de la tabla
 
     let divAlumnado = document.querySelector('.div-alumnado');
 
@@ -118,7 +112,7 @@ function mostrarAlumnado() {
     const tBody = document.createElement('tbody')
 
     listaAlumnado.forEach(alumnado => {
-        let { id, nombre, curso, edad } = alumnado
+        let { id, nombre, curso, edad } = alumnado;
 
         let trBody = document.createElement('tr'); 
 
@@ -228,6 +222,8 @@ function limpiarHTML() {
     }
 }
 
+//ESTADISTICA
+
 function mostrarEstadistica(event) {
     event.preventDefault();
     if(listaAlumnado.length == 0) {
@@ -290,11 +286,14 @@ function minimoCurso() {
     return minCurso
 }
 
-function promedioEdad() {
+
+  function promedioEdad() {
     let sumaEdades = 0
     listaAlumnado.forEach(alumno => {
         sumaEdades += parseInt(alumno.edad)
     })
-
-    return (sumaEdades / listaAlumnado.length)
+let resultado = sumaEdades / listaAlumnado.length;
+let acotar= resultado.toFixed(1);
+   
+    return acotar
 }
