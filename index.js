@@ -240,8 +240,8 @@ function mostrarEstadistica(event) {
     divEstadistica.innerHTML = `
     <p> La edad máxima es de: ${maxEdad}</p>
     <p> La edad minima es de: ${minEdad}</p>
-    <p> El curso máximo es de: ${maxCurso}</p>
-    <p> El curso minimo es de: ${minCurso}</p>
+    <p> El curso máximo es: ${maxCurso}</p>
+    <p> El curso minimo es: ${minCurso}</p>
     <p> El promedio de edad es: ${promEdad}</p>
     `
 }
