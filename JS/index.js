@@ -231,11 +231,11 @@ function mostrarEstadistica(event) {
         return
     }
 
-    const maxEdad = maximaEdad()
+    const maxEdad = maximaEdad(listaAlumnado)
     const minEdad = minimaEdad()
-    const maxCurso = maximoCurso()
+    const maxCurso = maximoCurso(listaAlumnado)
     const minCurso = minimoCurso()
-    const promEdad = promedioEdad()
+    const promEdad = promedioEdad(listaAlumnado)
 
     divEstadistica.innerHTML = `
     <p> La edad máxima es de: ${maxEdad}</p>
@@ -246,9 +246,9 @@ function mostrarEstadistica(event) {
     `
 }
 
-function maximaEdad() {
+function maximaEdad(array) {
     let maxEdad = 0
-    listaAlumnado.forEach(alumno => {
+    array.forEach(alumno => {
         if(maxEdad < parseInt(alumno.edad)) {
             maxEdad = alumno.edad
         }
@@ -266,9 +266,9 @@ function minimaEdad() {
     return minEdad
 }
 
-function maximoCurso() {
+function maximoCurso(array) {
     let maxCurso = 0
-    listaAlumnado.forEach(alumno => {
+    array.forEach(alumno => {
         if(maxCurso < parseInt(alumno.curso)) {
             maxCurso = alumno.curso
         }
@@ -287,12 +287,12 @@ function minimoCurso() {
 }
 
 
-  function promedioEdad() {
+  function promedioEdad(array) {
     let sumaEdades = 0
-    listaAlumnado.forEach(alumno => {
+    array.forEach(alumno => {
         sumaEdades += parseInt(alumno.edad)
     })
-let resultado = sumaEdades / listaAlumnado.length;
+let resultado = sumaEdades / array.length;
 let acotar= resultado.toFixed(1);
    
     return acotar
